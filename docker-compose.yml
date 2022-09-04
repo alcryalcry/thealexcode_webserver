@@ -1,0 +1,8 @@
+version: '3'
+services:
+  nginx-base:
+    build: .
+    image: thealexcode/nginx-base
+    container_name: nginx-base
+    ports:
+      - "80:80"

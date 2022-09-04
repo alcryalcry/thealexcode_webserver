@@ -1,26 +1,5 @@
 # nginx-base
 
-## Commands
-
-Makefile includes all commands to use
-
-```bash
-build-image:
-	docker build -t thealexcode/nginx-base .
-
-run:
-	docker run --rm -d -p 80:80 --name nginx thealexcode/nginx-base 
-
-run-dev:
-	docker run --rm -it -p 80:80 --name nginx thealexcode/nginx-base 
-
-stop:
-	docker stop nginx
-
-remove-image:
-	docker rmi thealexcode/nginx-base
-```
-
 ## Developing
 
 ```bash
@@ -38,14 +17,11 @@ COPY nginx.conf.local /etc/nginx/nginx.conf
 ```
 
 ```bash
-make build-image
+docker context use default
+docker-compose up -d
 ```
 
-```bash
-make run-dev
-```
-
-## Production
+## Deploy
 
 Change domain (ip) in `nginx.conf`
 
@@ -64,9 +40,13 @@ COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
 ```bash
-make build-image
+docker context use remote
+docker-compose up -d
 ```
 
+### rebuild production:
+
 ```bash
-make run
+docker context use remote
+docker-compose up --build -d
 ```
